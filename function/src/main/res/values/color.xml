@@ -5,4 +5,9 @@
     <color name="qr_result_view">#b0000000</color>
     <color name="qr_viewfinder_mask">#60000000</color>
     <color name="qr_possible_result_points">#c0ffff00</color>
+
+    <color name="sliding_menu_item_down">#ff39393b</color>
+    <color name="sliding_menu_item_release">#00000000</color>
+    <color name="sliding_menu_background">#ff2c2c2e</color>
+    <color name="sliding_menu_body_background">#fff5f5f5</color>
 </resources>
