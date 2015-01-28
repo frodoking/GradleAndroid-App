@@ -1,11 +1,11 @@
 <resources>
     <string name="function">function</string>
     <!--二维码-->
-    <string name="qr_code">qr_code_scan</string>
+    <string name="qr_code">二维码扫描</string>
     <string name="qr_scan_text">将二维码放入框内, 即可自动扫描</string>
 
     <!--分享-->
-    <string name="share_label">share</string>
+    <string name="share_label">第三方登录分享集成</string>
     <string name="more">更多</string>
     <string name="sm_item_demo">接口</string>
     <string name="sm_item_auth">授权</string>
