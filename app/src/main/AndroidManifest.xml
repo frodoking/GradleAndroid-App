@@ -149,6 +149,15 @@
             android:exported="true"
             android:launchMode="singleTop" />
 
+        <activity
+            android:name=".function.eventbus.EventBusActivity"
+            android:label="@string/event_bus" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.app.main.function.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
         <!--custom-->
         <activity
             android:name=".custom.CustomActivity"
