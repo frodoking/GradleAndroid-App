@@ -102,6 +102,13 @@
     <string name="msg_cant_accept_sticky">I am waiting for a sticky, but it might not OK, when the sticky does not come, I can not refresh text.</string>
     <string name="btn_simple_event">Simple Event(no onEvent() but onSimpleEvent())</string>
 
-    <!---->
+    <!--dynamic loading-->
     <string name="dynamic_loading">动态加载</string>
+    <!--retrofit-->
+    <string name="retrofit">网络请求框架retrofit+okhttp</string>
+    <plurals name="viewers">
+        <item quantity="zero">%d Viewers</item>
+        <item quantity="one">%d Viewer</item>
+        <item quantity="other">%d Viewers</item>
+    </plurals>
 </resources>

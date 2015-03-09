@@ -10,4 +10,6 @@
     <color name="sliding_menu_item_release">#00000000</color>
     <color name="sliding_menu_background">#ff2c2c2e</color>
     <color name="sliding_menu_body_background">#fff5f5f5</color>
+
+    <drawable name="backdrop">#90000000</drawable>
 </resources>

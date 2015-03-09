@@ -168,6 +168,16 @@
                 <category android:name="com.android.app.main.function.SAMPLE_CODE" />
             </intent-filter>
         </activity>
+
+        <!--插件化-动态加载-->
+        <activity android:name=".function.retrofit.RetrofitActivity"
+            android:label="@string/retrofit" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.android.app.plugin" />
+                <category android:name="com.android.app.main.function.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
         <!--custom-->
         <activity
             android:name=".custom.CustomActivity"
@@ -185,7 +195,6 @@
                 <category android:name="com.android.app.main.custom.SAMPLE_CODE" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
