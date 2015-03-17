@@ -105,10 +105,11 @@
     <!--dynamic loading-->
     <string name="dynamic_loading">动态加载</string>
     <!--retrofit-->
-    <string name="retrofit">网络请求框架retrofit+okhttp</string>
+    <string name="retrofit">网络请求框架retrofit</string>
     <plurals name="viewers">
         <item quantity="zero">%d Viewers</item>
         <item quantity="one">%d Viewer</item>
         <item quantity="other">%d Viewers</item>
     </plurals>
+    <string name="okhttp">网络请求框架okhttp</string>
 </resources>
