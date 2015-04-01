@@ -1,26 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 4
-        targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
-    }
-
-    lintOptions {
-        xmlReport false
-        warningsAsErrors true
-        quiet false
-        showAll true
-        disable 'OldTargetApi'
+        minSdkVersion 8
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-//    compile 'com.android.support:support-v4:21.0.3'
 }

@@ -1,26 +1,101 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.android.app"
-        minSdkVersion 11
+        applicationId "com.baidu.nuomi.sale"
+        minSdkVersion 8
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        versionCode 20150401
+        versionName "2.0.5"
+        multiDexEnabled false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
+
+
+    signingConfigs {
+        debug {
+        }
+        release {
+            storeFile file("app.keystore")
+            storePassword "Showmethemoney"
+            keyAlias "bnsale"
+            keyPassword "Showmethemoney"
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            buildConfigField "boolean", "ISDEBUG", "false"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            shrinkResources false
+            signingConfig signingConfigs.debug
+            buildConfigField "boolean", "ISDEBUG", "true"
+        }
+    }
+
+    productFlavors {
+        baidu {
+        }
+        /*
+        '360' {
+        }
+        wandoujia {
+        }
+        '91' {
+        }
+        */
+    }
+
+    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [BaiduMobAd_CHANNEL_VALUE: name]
+    }
+    applicationVariants.all { variant ->
+        def Date currentTime = new Date();
+        def java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyyMMddHHmmss");
+        def String dateString = formatter.format(currentTime);
+        variant.outputs.each { output ->
+            def String tmpName
+            def String fileName
+            if (variant.name.contains("Release")) {
+                tmpName = variant.name.replace("Release", "");
+                fileName = "saleapp_${tmpName}_${defaultConfig.versionName}_${dateString}_release";
+            } else {
+                tmpName = variant.name.replace("Debug", "");
+                fileName = "saleapp_${tmpName}_${defaultConfig.versionName}_${dateString}_debug";
+            }
+            output.outputFile = file("$project.buildDir/${fileName}.apk")
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     compile project(":function")
     compile project(":custom")
 }
