@@ -94,8 +94,12 @@ android {
     }
 }
 
+repositories { flatDir { dirs 'libs' } }
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    //compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    compile(name: 'android-framework', ext: 'aar')
+    compile(name: 'android-framework-app', ext: 'aar')
     compile project(":function")
     compile project(":custom")
 }
