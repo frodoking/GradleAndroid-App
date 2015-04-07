@@ -1,7 +1,14 @@
 package com.android.app.function.upload;
 
+import android.app.IntentService;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.PowerManager;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.Builder;
+
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,18 +19,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import android.app.IntentService;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.os.PowerManager;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.Builder;
-
 /**
  * Service to upload files as a multi-part form data in background using HTTP POST with notification center progress
  * display.
- * 
+ *
  * @author alexbbb (Alex Gotev)
  * @author eliasnaur
  */
@@ -76,9 +75,9 @@ public class UploadService extends IntentService {
 
     /**
      * Utility method that creates the intent that starts the background file upload service.
-     * 
+     *
      * @param task object containing the upload request
-     * @throws IllegalArgumentException if one or more arguments passed are invalid
+     * @throws IllegalArgumentException       if one or more arguments passed are invalid
      * @throws java.net.MalformedURLException if the server URL is not valid
      */
     public static void startUpload(final UploadRequest task) throws IllegalArgumentException, MalformedURLException {
@@ -202,7 +201,7 @@ public class UploadService extends IntentService {
             try {
                 if (reader != null)
                     reader.close();
-            } catch (Exception readerExc) {
+            } catch (Exception ignored) {
             }
         }
 
@@ -262,7 +261,7 @@ public class UploadService extends IntentService {
     }
 
     private void setRequestParameters(final OutputStream requestStream, final ArrayList<NameValue> requestParameters,
-                                      final byte[] boundaryBytes) throws IOException, UnsupportedEncodingException {
+                                      final byte[] boundaryBytes) throws IOException {
         if (!requestParameters.isEmpty()) {
 
             for (final NameValue parameter : requestParameters) {
@@ -273,13 +272,9 @@ public class UploadService extends IntentService {
         }
     }
 
-    private
-            void
-            uploadFiles(final String uploadId, final OutputStream requestStream,
-                        final ArrayList<FileToUpload> filesToUpload, final byte[] boundaryBytes)
-                                                                                                throws UnsupportedEncodingException,
-                                                                                                IOException,
-                                                                                                FileNotFoundException {
+    private void uploadFiles(final String uploadId, final OutputStream requestStream,
+                final ArrayList<FileToUpload> filesToUpload, final byte[] boundaryBytes)
+            throws IOException {
 
         final long totalBytes = getTotalBytes(filesToUpload);
         long uploadedBytes = 0;
@@ -319,7 +314,7 @@ public class UploadService extends IntentService {
         if (stream != null) {
             try {
                 stream.close();
-            } catch (Exception exc) {
+            } catch (Exception ignored) {
             }
         }
     }
@@ -329,7 +324,7 @@ public class UploadService extends IntentService {
             try {
                 stream.flush();
                 stream.close();
-            } catch (Exception exc) {
+            } catch (Exception ignored) {
             }
         }
     }
@@ -338,7 +333,7 @@ public class UploadService extends IntentService {
         if (connection != null) {
             try {
                 connection.disconnect();
-            } catch (Exception exc) {
+            } catch (Exception ignored) {
             }
         }
     }
