@@ -14,6 +14,8 @@
     <!-- 蓝牙分享所需的权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -187,6 +189,25 @@
                 <category android:name="com.android.app.main.function.SAMPLE_CODE" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".function.upload.UploadActivity"
+            android:label="@string/upload">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.app.main.function.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".function.upload.UploadService"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.alexbbb.uploadservice.action.upload"/>
+            </intent-filter>
+        </service>
+
         <!--custom-->
         <activity
             android:name=".custom.CustomActivity"
