@@ -15,6 +15,15 @@ import java.io.File;
 import java.net.URL;
 import java.util.UUID;
 
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.http.Multipart;
+import retrofit.http.POST;
+import retrofit.http.Part;
+import retrofit.mime.TypedFile;
+
 /**
  * Created by frodo on 2015/4/7.
  */
@@ -74,7 +83,8 @@ public class UploadActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-                onUploadButtonClick();
+//                onUploadButtonClick();
+                uploadToPersonServer();
             }
         });
 
@@ -130,6 +140,9 @@ public class UploadActivity extends Activity {
         return true;
     }
 
+    /**
+     * 系统原生方式
+     */
     private void onUploadButtonClick() {
         final String serverUrlString = serverUrl.getText().toString();
         final String fileToUploadPath = fileToUpload.getText().toString();
@@ -151,6 +164,52 @@ public class UploadActivity extends Activity {
         } catch (Exception exc) {
             Toast.makeText(this, "Malformed upload request. " + exc.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * 采用了retrofit上传服务器
+     */
+    private void uploadToPersonServer() {
+        final String fileToUploadPath = fileToUpload.getText().toString();
+        final String paramNameString = parameterName.getText().toString();
+
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://172.22.203.86:8080/").build();
+        String mimeType = "image/jpg";
+        File file = new File(fileToUploadPath);
+        TypedFile fileToSend = new TypedFile(mimeType, file);
+        FileWebService fileWebService = restAdapter.create(FileWebService.class);
+        fileWebService.upload(file.getName(), paramNameString, fileToSend, new Callback<String>() {
+            @Override
+            public void success(String s, final Response response) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(UploadActivity.this, "上传成功 " + response.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void failure(final RetrofitError error) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(UploadActivity.this, "上传成功 " + error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+    }
+
+
+    public interface FileWebService {
+        @Multipart
+        @POST("/manager/file/upload")
+        void upload(@Part("name") String name,
+                    @Part("md5") String md5,
+                    @Part("file") TypedFile file,
+                    Callback<String> callback);
     }
 }
 

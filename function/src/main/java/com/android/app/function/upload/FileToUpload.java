@@ -55,9 +55,9 @@ class FileToUpload implements Parcelable {
         StringBuilder builder = new StringBuilder();
         	
         builder.append("Content-Disposition: form-data; name=\"")
-               .append(paramName)
-               .append("\"; filename=\"")
                .append(fileName)
+               .append("\"; md5=\"")
+               .append(paramName)
                .append("\"")
                .append(NEW_LINE);
 		
