@@ -10,9 +10,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.app.R;
+import com.android.app.function.upload.upload.FileUpload;
+import com.android.app.function.upload.upload.FileUploadCenter;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.UUID;
 
 import retrofit.Callback;
@@ -30,6 +34,8 @@ import retrofit.mime.TypedFile;
 public class UploadActivity extends Activity {
 
     private static final String TAG = "Upload";
+    private static final String SERVER = "http://172.17.234.2:8080/";
+//    private static final String SERVER = "http://172.22.203.81:8080/";
 
     private ProgressBar progressBar;
     private Button uploadButton;
@@ -84,7 +90,8 @@ public class UploadActivity extends Activity {
             @Override
             public void onClick(View arg0) {
 //                onUploadButtonClick();
-                uploadToPersonServer();
+//                uploadToPersonServer();
+                uploadFileToServer();
             }
         });
 
@@ -173,7 +180,7 @@ public class UploadActivity extends Activity {
         final String fileToUploadPath = fileToUpload.getText().toString();
         final String paramNameString = parameterName.getText().toString();
 
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://172.22.203.86:8080/").build();
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(SERVER).build();
         String mimeType = "image/jpg";
         File file = new File(fileToUploadPath);
         TypedFile fileToSend = new TypedFile(mimeType, file);
@@ -194,7 +201,7 @@ public class UploadActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(UploadActivity.this, "上传成功 " + error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UploadActivity.this, String.format("上传失败 %s", Arrays.toString(error.getStackTrace())), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -202,6 +209,51 @@ public class UploadActivity extends Activity {
 
     }
 
+    public void uploadFileToServer() {
+        LinkedList<String> files = getImagePathFromSD();
+
+        FileUpload fileUpload = new FileUpload();
+        fileUpload.group = "For Test";
+        fileUpload.files = files;
+
+        FileUploadCenter fileUploadCenter = FileUploadCenter.from(this);
+        fileUploadCenter.init(SERVER + "manager/file/upload");
+        fileUploadCenter.addTask(fileUpload);
+    }
+
+
+    /**
+     * 从sd卡获取图片资源
+     *
+     * @return
+     */
+    private LinkedList<String> getImagePathFromSD() {
+        // 图片列表
+        LinkedList<String> picList = new LinkedList<>();
+
+        String imagePath = /*Environment.getExternalStorageDirectory().toString()*/"/storage/emulated/0/" + "/image/";
+        File mfile = new File(imagePath);
+        File[] files = mfile.listFiles();
+        // 将所有的文件存入ArrayList中,并过滤所有图片格式的文件
+        for (File file : files) {
+            if (checkIsImageFile(file.getPath())) {
+                picList.offer(file.getPath());
+            }
+        }
+        // 返回得到的图片列表
+        return picList;
+    }
+
+    /**
+     * 检查扩展名，得到图片格式的文件
+     */
+    private boolean checkIsImageFile(String fName) {
+        String FileEnd = fName.substring(fName.lastIndexOf(".") + 1,
+                fName.length()).toLowerCase();
+        return FileEnd.equals("jpg") || FileEnd.equals("gif")
+                || FileEnd.equals("png") || FileEnd.equals("jpeg")
+                || FileEnd.equals("bmp");
+    }
 
     public interface FileWebService {
         @Multipart
