@@ -34,8 +34,8 @@ import retrofit.mime.TypedFile;
 public class UploadActivity extends Activity {
 
     private static final String TAG = "Upload";
-    private static final String SERVER = "http://172.17.234.2:8080/";
-//    private static final String SERVER = "http://172.22.203.81:8080/";
+//    private static final String SERVER = "http://172.17.234.2:8080/";
+    private static final String SERVER = "http://172.22.203.81:8080/";
 
     private ProgressBar progressBar;
     private Button uploadButton;
@@ -217,7 +217,7 @@ public class UploadActivity extends Activity {
         fileUpload.files = files;
 
         FileUploadCenter fileUploadCenter = FileUploadCenter.from(this);
-        fileUploadCenter.init(SERVER + "manager/file/upload");
+        fileUploadCenter.init(SERVER);
         fileUploadCenter.addTask(fileUpload);
     }
 

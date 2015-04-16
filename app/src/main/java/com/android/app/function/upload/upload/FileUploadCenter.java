@@ -42,7 +42,7 @@ public class FileUploadCenter {
     public void init(String server) {
         taskQueue = new FileUploadTaskQueue(this, context);
         craft = new FileUploadCraft();
-        AsyncRestClient.getDefault().setBaseUrl(server);
+        RestClient.getDefault().setBaseUrl(server);
     }
 
 

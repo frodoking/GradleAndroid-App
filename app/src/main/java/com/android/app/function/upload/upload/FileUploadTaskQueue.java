@@ -3,6 +3,8 @@ package com.android.app.function.upload.upload;
 import android.content.Context;
 import android.util.Log;
 
+import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -76,12 +78,14 @@ public class FileUploadTaskQueue {
         return new FileUploadTask(context, currentTask, new TaskListener() {
             @Override
             public void onProgress(String group, String fileName, int bytesWritten, int totalSize) {
-                log("onProgress", "===group==>> " + group + ", fileName==>> " + fileName + ", bytesWritten==>> " + bytesWritten + ", totalSize==>> " + totalSize);
+                String log =  MessageFormat.format("===group==>> {0}, ===fileName==>> {1}, bytesWritten==>> {2}, totalSize==>> {3}", group,fileName, bytesWritten, totalSize);
+                log("onProgress", log);
             }
 
             @Override
             public void onFailure(String group, int statusCode, Map<String, String> failedMap, Throwable throwable) {
-                log("onFailure", "===group==>> " + group + ", statusCode==>> " + statusCode + ", failedMap==>> " + failedMap.toString() + ", throwable==>> " + throwable.getStackTrace().toString());
+                String log =  MessageFormat.format("===group==>> {0}, ===statusCode==>> {1}, failedMap==>> {2}, throwable==>> {3}", group,statusCode, failedMap, Arrays.toString(throwable.getStackTrace()));
+                log("onFailure", log);
                 if (fileUploadCenter.writeCrafts(lastTaskNames)) {
                     clean();
                 }
@@ -89,7 +93,8 @@ public class FileUploadTaskQueue {
 
             @Override
             public void onSuccess(String group, int statusCode, Map<String, String> finishedMap) {
-                log("onFailure", "===group==>> " + group + ", statusCode==>> " + statusCode + ", finishedMap==>> " + finishedMap.toString());
+                String log =  MessageFormat.format("===group==>> {0}, ===statusCode==>> {1}, finishedMap==>> {2}", group,statusCode, finishedMap);
+                log("onSuccess", log);
                 finishTaskByName(currentTask);
                 try {
                     onNotify();

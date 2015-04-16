@@ -62,7 +62,7 @@ public class FileUploadTask implements Runnable {
                             e.printStackTrace();
                         }
 
-                        AsyncRestClient.getDefault().post("manager/file/upload", params, new AsyncHttpResponseHandler() {
+                        RestClient.getDefault().post("manager/file/upload", params, new AsyncHttpResponseHandler() {
                             @Override
                             public void onProgress(int bytesWritten, int totalSize) {
                                 super.onProgress(bytesWritten, totalSize);
