@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:text="@string/hello_world"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_middle"
+            android:layout_height="wrap_content"/>
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:layout_marginTop="@dimen/margin_middle"
+            android:hint="@string/hello_world"/>
+
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_middle"
+            android:text="@string/app_name"/>
+
+    <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_middle"
+            android:layout_height="wrap_content">
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="radio_one"/>
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="radio_two"/>
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="radio_three"/>
+    </RadioGroup>
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/margin_middle"
+            android:layout_height="wrap_content"
+            android:text="check_box_one"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="check_box_two"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="check_box_three"/>
+
+    <Spinner
+            android:layout_width="wrap_content"
+            android:entries="@array/spinners"
+            android:layout_marginTop="@dimen/margin_middle"
+            android:layout_height="wrap_content"/>
+
+    <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_middle"
+            style="@style/ProgressBarHorizontalTheme"
+            android:progress="50"
+            android:secondaryProgress="20"  />
+
+</LinearLayout>

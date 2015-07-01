@@ -1,1 +1,1 @@
-include ':app', ':custom', ':function', ':plugin', ':dynamicloading'
+include ':app', ':custom', ':function', ':plugin', ':dynamicloading', ':theme'

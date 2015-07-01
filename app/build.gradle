@@ -8,8 +8,8 @@ android {
         applicationId "com.android.app"
         minSdkVersion 8
         targetSdkVersion 21
-        versionCode 20150401
-        versionName "2.0.5"
+        versionCode 1
+        versionName "1.0"
         multiDexEnabled false
     }
     compileOptions {
@@ -84,10 +84,10 @@ android {
             def String fileName
             if (variant.name.contains("Release")) {
                 tmpName = variant.name.replace("Release", "");
-                fileName = "saleapp_${tmpName}_${defaultConfig.versionName}_${dateString}_release";
+                fileName = "app_${tmpName}_${defaultConfig.versionName}_${dateString}_release";
             } else {
                 tmpName = variant.name.replace("Debug", "");
-                fileName = "saleapp_${tmpName}_${defaultConfig.versionName}_${dateString}_debug";
+                fileName = "app_${tmpName}_${defaultConfig.versionName}_${dateString}_debug";
             }
             output.outputFile = file("$project.buildDir/${fileName}.apk")
         }

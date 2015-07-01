@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Theme</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="spinners">
+        <item>北京</item>
+        <item>上海 </item>
+        <item>广州</item>
+        <item>深圳</item>
+    </string-array>
+</resources>

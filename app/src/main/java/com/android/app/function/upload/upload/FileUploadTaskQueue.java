@@ -6,7 +6,6 @@ import android.util.Log;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Map;
 
 /**
  * 上传队列
@@ -83,8 +82,8 @@ public class FileUploadTaskQueue {
             }
 
             @Override
-            public void onFailure(String group, int statusCode, Map<String, String> failedMap, Throwable throwable) {
-                String log =  MessageFormat.format("===group==>> {0}, ===statusCode==>> {1}, failedMap==>> {2}, throwable==>> {3}", group,statusCode, failedMap, Arrays.toString(throwable.getStackTrace()));
+            public void onFailure(String group, int statusCode, Object failedObj, Throwable throwable) {
+                String log =  MessageFormat.format("===group==>> {0}, ===statusCode==>> {1}, failedMap==>> {2}, throwable==>> {3}", group,statusCode, failedObj, Arrays.toString(throwable.getStackTrace()));
                 log("onFailure", log);
                 if (fileUploadCenter.writeCrafts(lastTaskNames)) {
                     clean();
@@ -92,8 +91,8 @@ public class FileUploadTaskQueue {
             }
 
             @Override
-            public void onSuccess(String group, int statusCode, Map<String, String> finishedMap) {
-                String log =  MessageFormat.format("===group==>> {0}, ===statusCode==>> {1}, finishedMap==>> {2}", group,statusCode, finishedMap);
+            public void onSuccess(String group, int statusCode, Object finishedObj) {
+                String log =  MessageFormat.format("===group==>> {0}, ===statusCode==>> {1}, finishedMap==>> {2}", group,statusCode, finishedObj);
                 log("onSuccess", log);
                 finishTaskByName(currentTask);
                 try {
