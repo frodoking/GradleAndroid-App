@@ -31,7 +31,6 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -171,7 +170,7 @@
         </activity>
 
         <!--插件化-动态加载-->
-        <activity android:name=".PluginActivity"
+        <activity android:name="com.ryg.dynamicload.sample.mainhost.PluginHostActivity"
             android:label="@string/dynamic_loading" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -225,6 +224,18 @@
                 <category android:name="com.android.app.main.custom.SAMPLE_CODE" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".theme.ThemeActivity"
+            android:label="@string/theme"
+            android:theme="@style/ThemeProjectTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.app.main.custom.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>

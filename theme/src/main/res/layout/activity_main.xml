@@ -5,7 +5,7 @@
               android:layout_height="match_parent">
 
     <TextView
-            android:text="@string/hello_world"
+            android:text="@string/simple_text"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/margin_middle"
             android:layout_height="wrap_content"/>
@@ -15,13 +15,13 @@
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:layout_marginTop="@dimen/margin_middle"
-            android:hint="@string/hello_world"/>
+            android:hint="@string/simple_text"/>
 
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_middle"
-            android:text="@string/app_name"/>
+            android:text="@string/simple_text"/>
 
     <RadioGroup
             android:layout_width="match_parent"

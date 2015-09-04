@@ -6,7 +6,7 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme" parent="AppBaseTheme">
+    <style name="ThemeProjectTheme" parent="AppBaseTheme">
         <item name="android:dialogTheme">@style/DialogTheme</item>
         <item name="android:textViewStyle">@style/TextViewTheme</item>
         <item name="android:editTextStyle">@style/EditTextTheme</item>

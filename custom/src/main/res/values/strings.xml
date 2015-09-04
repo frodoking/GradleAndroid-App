@@ -5,4 +5,9 @@
     <string name="ptr_release_to_refresh">Release to refresh</string>
     <string name="ptr_loading">Loading</string>
     <string name="ptr_last_updated">Updated: %1$s</string>
+
+    <string name="table_view">表格</string>
+    <string name="simple_adapter">Simple adapter</string>
+    <string name="style_adapter">Style adapter</string>
+    <string name="family_adapter">Family adapter</string>
 </resources>

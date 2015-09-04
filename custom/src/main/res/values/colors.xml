@@ -18,4 +18,7 @@
     <color name="transparent">#00000000</color>
     <color name="normal_bg">#F3F3F3</color>
 
+    <color name="shadow_start">#80000000</color>
+    <color name="shadow_end">#00000000</color>
+
 </resources>
