@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 分割线颜色 -->
+    <drawable name="divider">@color/general_gray_light</drawable>
+    <!-- 透明图片 -->
+    <drawable name="transparent">#00000000</drawable>
+</resources>

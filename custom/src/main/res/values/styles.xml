@@ -2,4 +2,34 @@
 
     <style name="AppTheme" parent="android:Theme.Light" />
 
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+
+    <style name="CustomDialog.Progress" parent="@style/CustomDialog">
+
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 内容的背景 -->
+        <item name="android:windowBackground">@color/transparent</item>
+        <!-- 屏幕背景。置为 false 则无屏幕背景。 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 屏幕背景的半透明度。1为不透明。 -->
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/divider</item>
+    </style>
 </resources>

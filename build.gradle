@@ -1,35 +1,25 @@
-ext {
-    compileSdkVersion = 22
-    buildToolsVersion = System.env.CUSTOM_BUILDTOOLS != null ? System.env.CUSTOM_BUILDTOOLS : '23.0.0 rc2'
-}
-
+apply from: 'dependencyDefinitions.gradle'
 buildscript {
-    def gradleVersion = System.env.CUSTOM_GRADLE != null ? System.env.CUSTOM_GRADLE : '1.0.1'
-
     repositories {
-        if (System.env.CUSTOM_REPO != null) {
-            maven { url System.env.CUSTOM_REPO }
-        } else {
-            mavenCentral()
-        }
+        jcenter()
     }
+
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath "com.android.tools.build:gradle:${ANDROID_GRADLE_VERSION}"
     }
 }
 
-allprojects {
+subprojects {
     repositories {
-        if (System.env.CUSTOM_REPO != null) {
-            maven { url System.env.CUSTOM_REPO }
-        } else {
-            mavenCentral()
-        }
+        jcenter()
     }
 
     tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
+        sourceCompatibility = JavaVersion.VERSION_1_7
+        targetCompatibility = JavaVersion.VERSION_1_7
     }
 }
 
-apply plugin: 'android-reporting'
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.5'
+}
