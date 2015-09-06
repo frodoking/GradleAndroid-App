@@ -13,7 +13,6 @@ public class CustomActivity extends AbstractListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GlobalDialog.showDialog(this);
     }
 
     @Override

@@ -251,6 +251,15 @@
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".function.safewebviewbridge.simple.WebActivity"
+            android:label="@string/safewebviewbridge">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.app.main.function.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
         <!--custom-->
         <activity
             android:name=".custom.CustomActivity"
@@ -278,6 +287,16 @@
                 <category android:name="com.android.app.main.custom.SAMPLE_CODE" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".custom.dialog.CustomDialogActivity"
+            android:label="@string/custom_dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.app.main.custom.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
 
 
     </application>

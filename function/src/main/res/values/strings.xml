@@ -113,7 +113,7 @@
     </plurals>
     <string name="okhttp">网络请求框架okhttp</string>
 
-<!--upload-->
+    <!--upload-->
     <string name="upload">Upload</string>
     <string name="server_script_url">Server script URL</string>
     <string name="file_to_upload_path">Path of the file to upload</string>
@@ -130,5 +130,9 @@
     <string name="provide_param_name">Please provide the name of the form parameter that will contain file\'s data</string>
     <string name="server_url_hint">http://company.com/path/to/script</string>
     <string name="file_path_hint">/path/to/your/file.ext</string>
+
+    <!-- web js native-->
+    <string name="safewebviewbridge">HyBrid解决Java与JavaScript互通方案</string>
+    <string name="dialog_title_system_msg">系统消息</string>
 
 </resources>

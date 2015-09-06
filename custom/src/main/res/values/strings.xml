@@ -10,4 +10,7 @@
     <string name="simple_adapter">Simple adapter</string>
     <string name="style_adapter">Style adapter</string>
     <string name="family_adapter">Family adapter</string>
+
+    <!-- 弹窗 -->
+    <string name="custom_dialog">自定义弹窗</string>
 </resources>
