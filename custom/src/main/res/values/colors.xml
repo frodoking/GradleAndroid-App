@@ -3,6 +3,7 @@
     <!-- 公共颜色 -->
     <color name="general_blue">#196ffe</color>
     <color name="general_persimmon">#ff4970</color>
+    <color name="general_green">#76EE00</color>
     <color name="general_black">#333333</color>
     <color name="general_white">#ffffff</color>
     <color name="general_gray_deep">#7f7f7f</color>

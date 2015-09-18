@@ -77,13 +77,13 @@ public class FileUploadTaskQueue {
         return new FileUploadTask(context, currentTask, new TaskListener() {
             @Override
             public void onProgress(String group, String fileName, int bytesWritten, int totalSize) {
-                String log =  MessageFormat.format("===group==>> {0}, ===fileName==>> {1}, bytesWritten==>> {2}, totalSize==>> {3}", group,fileName, bytesWritten, totalSize);
+                String log = MessageFormat.format("===group==>> {0}, ===fileName==>> {1}, bytesWritten==>> {2}, totalSize==>> {3}", group, fileName, bytesWritten, totalSize);
                 log("onProgress", log);
             }
 
             @Override
             public void onFailure(String group, int statusCode, Object failedObj, Throwable throwable) {
-                String log =  MessageFormat.format("===group==>> {0}, ===statusCode==>> {1}, failedMap==>> {2}, throwable==>> {3}", group,statusCode, failedObj, Arrays.toString(throwable.getStackTrace()));
+                String log = MessageFormat.format("===group==>> {0}, ===statusCode==>> {1}, failedMap==>> {2}, throwable==>> {3}", group, statusCode, failedObj, Arrays.toString(throwable.getStackTrace()));
                 log("onFailure", log);
                 if (fileUploadCenter.writeCrafts(lastTaskNames)) {
                     clean();
@@ -92,7 +92,7 @@ public class FileUploadTaskQueue {
 
             @Override
             public void onSuccess(String group, int statusCode, Object finishedObj) {
-                String log =  MessageFormat.format("===group==>> {0}, ===statusCode==>> {1}, finishedMap==>> {2}", group,statusCode, finishedObj);
+                String log = MessageFormat.format("===group==>> {0}, ===statusCode==>> {1}, finishedMap==>> {2}", group, statusCode, finishedObj);
                 log("onSuccess", log);
                 finishTaskByName(currentTask);
                 try {

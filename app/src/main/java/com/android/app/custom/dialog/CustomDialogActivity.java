@@ -19,7 +19,7 @@ public class CustomDialogActivity extends Activity {
         ll.setOrientation(LinearLayout.VERTICAL);
 
 
-        Button btn1= new Button(this);
+        Button btn1 = new Button(this);
         btn1.setText("showMsgDialog");
         btn1.setTextColor(getResources().getColor(R.color.general_white));
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -29,7 +29,7 @@ public class CustomDialogActivity extends Activity {
             }
         });
 
-        Button btn2= new Button(this);
+        Button btn2 = new Button(this);
         btn2.setText("showToastDialog");
         btn2.setTextColor(getResources().getColor(R.color.general_white));
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -39,7 +39,7 @@ public class CustomDialogActivity extends Activity {
             }
         });
 
-        Button btn3= new Button(this);
+        Button btn3 = new Button(this);
         btn3.setText("showArrayListViewDialog");
         btn3.setTextColor(getResources().getColor(R.color.general_white));
         btn3.setOnClickListener(new View.OnClickListener() {

@@ -297,7 +297,14 @@
             </intent-filter>
         </activity>
 
-
+        <activity
+            android:name=".custom.roundedrectangleview.RoundedRectangleActivity"
+            android:label="@string/custom_rounded_rectangle_textview">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.app.main.custom.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
 
     </application>
 

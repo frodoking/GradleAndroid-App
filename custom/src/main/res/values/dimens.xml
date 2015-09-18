@@ -11,6 +11,9 @@
     <dimen name="big_padding_25_length">25dip</dimen>
     <dimen name="normal_divider_height">10dip</dimen>
 
+    <dimen name="px_1">1px</dimen>
+    <dimen name="dp_3">3dp</dimen>
+
     <!-- 文字大小 -->
     <dimen name="text_bigger">22sp</dimen>
     <dimen name="text_big">20sp</dimen>

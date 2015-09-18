@@ -13,4 +13,6 @@
 
     <!-- 弹窗 -->
     <string name="custom_dialog">自定义弹窗</string>
+
+    <string name="custom_rounded_rectangle_textview">自定义RoundedRectangleTextView</string>
 </resources>
