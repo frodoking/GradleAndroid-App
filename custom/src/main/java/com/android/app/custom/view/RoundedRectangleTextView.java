@@ -2,6 +2,7 @@ package com.android.app.custom.view;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
@@ -141,10 +142,29 @@ public class RoundedRectangleTextView extends TextView {
     }
 
     private RoundedRectangleTextView drawable(GradientDrawable drawable, int strokeColor, int strokeWidth, int solidColor) {
+        setDrawable(drawable, strokeColor, strokeWidth, solidColor, radius);
+        return this;
+    }
+
+    public static void setDrawable(GradientDrawable drawable, int strokeColor, int strokeWidth, int solidColor, int radius) {
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setStroke(strokeWidth, strokeColor);
+        drawable.setCornerRadius(radius);
         drawable.setColor(solidColor);
-        return this;
+    }
+
+    public static GradientDrawable createGradientDrawable(int solidColor, int radius) {
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(radius);
+        drawable.setColor(solidColor);
+        return drawable;
+    }
+
+    public static GradientDrawable createGradientDrawable(int strokeColor, int strokeWidth, int solidColor, int radius) {
+        GradientDrawable drawable = new GradientDrawable();
+        setDrawable(drawable, strokeColor, strokeWidth, solidColor, radius);
+        return drawable;
     }
 
     public RoundedRectangleTextView radius(int radius) {
@@ -154,6 +174,20 @@ public class RoundedRectangleTextView extends TextView {
         selectedDrawable.setCornerRadius(radius);
         unableDrawable.setCornerRadius(radius);
         return this;
+    }
+
+    public RoundedRectangleTextView radii(float[] radii) {
+        normalDrawable.setCornerRadii(radii);
+        focusedDrawable.setCornerRadii(radii);
+        pressedDrawable.setCornerRadii(radii);
+        selectedDrawable.setCornerRadii(radii);
+        unableDrawable.setCornerRadii(radii);
+        return this;
+    }
+
+    public RoundedRectangleTextView textColor(int normal) {
+        int grayColor = getResources().getColor(R.color.gray);
+        return textColor(normal, grayColor, grayColor);
     }
 
     public RoundedRectangleTextView textColor(int normal, int pressed, int unable) {
@@ -188,11 +222,15 @@ public class RoundedRectangleTextView extends TextView {
     }
 
     public void update() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            setBackground(stateListDrawable);
-        } else {
-            setBackgroundDrawable(stateListDrawable);
-        }
+        fillTextViewBackgroundDrawable(this, stateListDrawable);
         setTextColor(createColorStateList(normalTextColor, pressedTextColor, focusedTextColor, selectedTextColor, unableTextColor));
+    }
+
+    public static void fillTextViewBackgroundDrawable(TextView textView, Drawable drawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            textView.setBackground(drawable);
+        } else {
+            textView.setBackgroundDrawable(drawable);
+        }
     }
 }

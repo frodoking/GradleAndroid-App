@@ -11,6 +11,7 @@
     <color name="message_list_text_color">#373737</color>
     <color name="general_bg">#f5f5f5</color>
     <color name="blue">#ff196ffe</color>
+    <color name="light_blue">#4D196ffe</color>
     <color name="gray">#ff7f7f7f</color>
 
     <!-- 分割线颜色 -->

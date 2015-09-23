@@ -37,15 +37,13 @@
         android:orientation="horizontal"
         android:layout_height="@dimen/item_second_height">
 
-        <Button
+        <com.android.app.custom.view.RoundedRectangleTextView
             android:id="@+id/ok"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="确定"
             android:textSize="@dimen/text_small"
-            android:textColor="@color/blue"
-            android:background="@drawable/normal_selector"
             android:gravity="center" />
 
         <View
@@ -54,15 +52,13 @@
             android:layout_width="1px"
             android:layout_height="match_parent" />
 
-        <Button
+        <com.android.app.custom.view.RoundedRectangleTextView
             android:id="@+id/cancel"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="取消"
             android:textSize="@dimen/text_small"
-            android:textColor="@color/blue"
-            android:background="@drawable/normal_selector"
             android:gravity="center" />
     </LinearLayout>
 

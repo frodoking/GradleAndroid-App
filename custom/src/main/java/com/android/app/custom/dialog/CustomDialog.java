@@ -2,7 +2,11 @@ package com.android.app.custom.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.Spanned;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,6 +23,7 @@ import android.widget.TextView;
 
 import com.android.app.custom.R;
 import com.android.app.custom.ScreenUtil;
+import com.android.app.custom.view.RoundedRectangleTextView;
 
 import java.util.List;
 
@@ -33,10 +38,20 @@ public class CustomDialog {
     private Context context;
 
     private View rootView;
-    private TextView titleTV, okTV, cancelTv;
+    private TextView titleTV;
+    private RoundedRectangleTextView okTV, cancelTv;
 
     private View titleDividerV, confirmDividerV;
     private LinearLayout containerVG;
+
+    public int minHeight;
+    public int maxHeight;
+    public int titleHeight;
+    public int buttonHeight;
+
+    private int bgColor;
+    private int radius;
+
 
     public CustomDialog(Context context) {
         this(context, R.style.CustomDialog_Progress);
@@ -46,6 +61,9 @@ public class CustomDialog {
         this.context = context;
         dialog = new Dialog(context, theme);
 
+        bgColor = Color.WHITE;
+        radius = context.getResources().getDimensionPixelSize(R.dimen.dp_3);
+
         rootView = LayoutInflater.from(context).inflate(R.layout.dialog_custom_layout, null);
         initViews(rootView);
 
@@ -53,7 +71,15 @@ public class CustomDialog {
         final int screenHeight = ScreenUtil.getDisplayHeight(context);
 
         final int maxWidth = screenWidth * 4 / 5;
-        final int maxHeight = screenHeight * 3 / 4;
+        minHeight = screenHeight / 4;
+        maxHeight = screenHeight * 3 / 4;
+
+        titleHeight = context.getResources().getDimensionPixelSize(R.dimen.item_second_height);
+        buttonHeight = titleHeight;
+
+        setBackgroundColor(bgColor);
+        updateButton(okTV, cancelTv);
+
         dialog.setContentView(rootView, new LinearLayout.LayoutParams(maxWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
@@ -63,13 +89,59 @@ public class CustomDialog {
 
         containerVG = (LinearLayout) rootView.findViewById(R.id.container);
 
-        okTV = (TextView) rootView.findViewById(R.id.ok);
+        okTV = (RoundedRectangleTextView) rootView.findViewById(R.id.ok);
         confirmDividerV = rootView.findViewById(R.id.confirm_btn_divider);
-        cancelTv = (TextView) rootView.findViewById(R.id.cancel);
+        cancelTv = (RoundedRectangleTextView) rootView.findViewById(R.id.cancel);
     }
 
     public View getRootView() {
         return rootView;
+    }
+
+    public void setBackgroundColor(int color) {
+        setBackgroundColor(color, 255);
+    }
+
+    public void setBackgroundColor(int color, int alpha) {
+        GradientDrawable drawable = RoundedRectangleTextView.createGradientDrawable(color, radius);
+        drawable.setAlpha(alpha);
+        rootView.setBackgroundDrawable(drawable);
+    }
+
+    private void updateButton(RoundedRectangleTextView okTV, RoundedRectangleTextView cancelTv) {
+        Resources resources = context.getResources();
+        int whiteColor = Color.WHITE;
+        int blueColor = resources.getColor(R.color.blue);
+        int bluePressedColor = resources.getColor(R.color.light_blue);
+        int grayColor = resources.getColor(R.color.general_gray_light);
+        if (okTV != null && cancelTv != null) {
+            okTV.normalDrawable(whiteColor, whiteColor)
+                    .pressedDrawable(grayColor, grayColor)
+                    .textColor(blueColor, bluePressedColor, bluePressedColor)
+                    .radii(new float[]{0, 0, 0, 0, 0, 0, radius, radius})
+                    .update();
+            cancelTv.normalDrawable(whiteColor, whiteColor)
+                    .pressedDrawable(grayColor, grayColor)
+                    .textColor(blueColor, bluePressedColor, bluePressedColor)
+                    .radii(new float[]{0, 0, 0, 0, radius, radius, 0, 0})
+                    .update();
+        } else {
+            if (okTV != null) {
+                okTV.normalDrawable(whiteColor, whiteColor)
+                        .pressedDrawable(grayColor, grayColor)
+                        .textColor(blueColor, bluePressedColor, bluePressedColor)
+                        .radii(new float[]{0, 0, 0, 0, radius, radius, radius, radius})
+                        .update();
+            }
+
+            if (cancelTv != null) {
+                cancelTv.normalDrawable(whiteColor, whiteColor)
+                        .pressedDrawable(grayColor, grayColor)
+                        .textColor(blueColor, bluePressedColor, bluePressedColor)
+                        .radii(new float[]{0, 0, 0, 0, radius, radius, radius, radius})
+                        .update();
+            }
+        }
     }
 
     public void setNoTitle() {
@@ -104,6 +176,14 @@ public class CustomDialog {
         containerVG.setMinimumHeight(height);
     }
 
+    public void measureContainerMaxHeight(int height) {
+        containerVG.getLayoutParams().height = height;
+    }
+
+    public void measureContainerDefaultMaxHeight() {
+        containerVG.getLayoutParams().height = maxHeight - titleHeight - buttonHeight;
+    }
+
     public void setContainerResId(int resId) {
         View v = LayoutInflater.from(context).inflate(resId, null);
         setContainerView(v);
@@ -119,11 +199,13 @@ public class CustomDialog {
     public void setSingleConfirmBtn() {
         confirmDividerV.setVisibility(View.GONE);
         cancelTv.setVisibility(View.GONE);
+        updateButton(okTV, null);
     }
 
     public void setSingleCancelBtn() {
         okTV.setVisibility(View.GONE);
         confirmDividerV.setVisibility(View.GONE);
+        updateButton(null, cancelTv);
     }
 
     /**
@@ -181,7 +263,7 @@ public class CustomDialog {
 
             msgTV = new TextView(getContext());
             msgTV.setGravity(Gravity.CENTER_VERTICAL);
-            int padding = (int) getContext().getResources().getDimension(R.dimen.normal_padding_15_length);
+            int padding = (int) getContext().getResources().getDimension(R.dimen.normal_padding_12_length);
             msgTV.setPadding(padding, 0, padding, 0);
 
             int textSize = (int) getContext().getResources().getDimension(R.dimen.text_small);
@@ -226,7 +308,7 @@ public class CustomDialog {
 
             lv = new ListView(context);
             lv.setDividerHeight(1);
-            lv.setSelector(R.drawable.normal_selector);
+            lv.setSelector(R.drawable.selector_listview_item_bg);
             adapter = new BaseAdapter() {
                 @Override
                 public int getCount() {
@@ -248,7 +330,7 @@ public class CustomDialog {
                     final ViewHolder vh;
                     if (convertView == null) {
                         TextView itemView = new TextView(context);
-                        itemView.setTextColor(context.getResources().getColor(R.color.general_black));
+                        itemView.setTextColor(Color.BLACK);
                         itemView.setGravity(gravity);
                         itemView.setHeight(itemHeight);
                         itemView.setPadding(paddingLR, 0, paddingLR, 0);
@@ -270,6 +352,12 @@ public class CustomDialog {
                 }
             };
             lv.setAdapter(adapter);
+
+            int totalSize = titleHeight + buttonHeight + itemHeight * list.size();
+            if (totalSize > maxHeight) {
+                measureContainerMinHeight(maxHeight);
+            }
+
             setContainerView(lv);
 
             setCancelBtn("取消", new View.OnClickListener() {
@@ -302,18 +390,19 @@ public class CustomDialog {
      */
     public static class AutoDismissDialog extends CustomDialog {
 
+        private ImageView closeBtn;
         private TextView msgTV;
 
         public AutoDismissDialog(Context context) {
             super(context);
             onlyKeepContainerView();
             setCanceledOnTouchOutside(true);
-            getRootView().setBackgroundColor(context.getResources().getColor(R.color.general_black));
-            int padding = (int) getContext().getResources().getDimension(R.dimen.normal_padding_15_length);
+            getRootView().setBackgroundColor(Color.BLACK);
+            int padding = (int) getContext().getResources().getDimension(R.dimen.normal_padding_length);
 
             FrameLayout frameLayout = new FrameLayout(context);
 
-            ImageView closeBtn = new ImageView(context);
+            closeBtn = new ImageView(context);
             closeBtn.setImageResource(R.drawable.ic_close);
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -325,16 +414,18 @@ public class CustomDialog {
 
             msgTV = new TextView(getContext());
             msgTV.setGravity(Gravity.CENTER);
-            msgTV.setTextColor(context.getResources().getColor(R.color.general_white));
+            msgTV.setTextColor(Color.WHITE);
 
             msgTV.setPadding(padding, padding, padding, padding);
             FrameLayout.LayoutParams params2 = new FrameLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             frameLayout.addView(msgTV, params2);
 
             measureContainerMinHeight(context.getResources().getDimensionPixelSize(R.dimen.dialog_content_height));
             setContainerView(frameLayout);
+
+            setBackgroundColor(Color.BLACK, 192);
 
             closeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -346,6 +437,14 @@ public class CustomDialog {
 
         public void setMsg(String msg) {
             msgTV.setText(msg);
+        }
+
+        public void setMsg(Spanned msgSpanned) {
+            msgTV.setText(msgSpanned);
+        }
+
+        public void noNeedCloseButton() {
+            closeBtn.setVisibility(View.GONE);
         }
 
         @Override
