@@ -100,5 +100,6 @@ dependencies {
     compile project(":function")
     compile project(":custom")
     compile project(":theme")
-    compile project(":pluginhost")
+    compile project(":feature")
+    compile project(":plugin:pluginhost")
 }

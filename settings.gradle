@@ -1,1 +1,1 @@
-include ':app', ':custom', ':function', ':theme', ':dynamicloadapklibrary', ':pluginhost', ':plugina', ':pluginb'
+include ':app', ':custom', ':function', ':theme', ':dynamicloadapklibrary', ':plugin:pluginhost', ':plugin:plugina', ':plugin:pluginb', ':feature'
