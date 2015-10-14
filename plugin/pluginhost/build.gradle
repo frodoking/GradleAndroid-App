@@ -17,5 +17,5 @@ android {
 }
 
 dependencies {
-    compile project(':dynamicloadapklibrary')
+    compile project(':plugin:dynamicloadapklibrary')
 }
