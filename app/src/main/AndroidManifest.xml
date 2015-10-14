@@ -305,26 +305,6 @@
                 <category android:name="com.android.app.main.custom.SAMPLE_CODE" />
             </intent-filter>
         </activity>
-
-        <!--feature-->
-        <activity
-            android:name=".feature.FeatureActivity"
-            android:label="@string/feature_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.app.main.SAMPLE_CODE" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".feature.recyclerview.MainActivity"
-            android:label="@string/recyclerview_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.app.main.feature.SAMPLE_CODE" />
-            </intent-filter>
-        </activity>
-
     </application>
 
 </manifest>
