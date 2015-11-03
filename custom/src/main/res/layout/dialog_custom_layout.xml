@@ -25,7 +25,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:gravity="center_vertical"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <View
         android:id="@+id/container_divider"
@@ -48,6 +49,22 @@
 
         <View
             android:id="@+id/confirm_btn_divider"
+            style="@style/divider"
+            android:layout_width="1px"
+            android:visibility="gone"
+            android:layout_height="match_parent" />
+
+        <com.android.app.custom.view.RoundedRectangleTextView
+            android:id="@+id/neutral"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:textSize="@dimen/text_small"
+            android:gravity="center" />
+
+        <View
+            android:id="@+id/neutral_btn_divider"
             style="@style/divider"
             android:layout_width="1px"
             android:layout_height="match_parent" />

@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.TextView;
 
 import com.android.app.custom.R;
@@ -168,6 +169,7 @@ public class RoundedRectangleTextView extends TextView {
     }
 
     public RoundedRectangleTextView radius(int radius) {
+        this.radius = radius;
         normalDrawable.setCornerRadius(radius);
         focusedDrawable.setCornerRadius(radius);
         pressedDrawable.setCornerRadius(radius);
@@ -222,15 +224,45 @@ public class RoundedRectangleTextView extends TextView {
     }
 
     public void update() {
-        fillTextViewBackgroundDrawable(this, stateListDrawable);
+        fillViewBackgroundDrawable(this, stateListDrawable);
         setTextColor(createColorStateList(normalTextColor, pressedTextColor, focusedTextColor, selectedTextColor, unableTextColor));
     }
 
-    public static void fillTextViewBackgroundDrawable(TextView textView, Drawable drawable) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            textView.setBackground(drawable);
+    /**
+     * 解决AbsList的选中情况
+     * @param selected 是否选中
+     */
+    public void setSelectedByBadWay(boolean selected) {
+        if (selected) {
+            setTextColor(pressedTextColor);
+            fillViewBackgroundDrawable(this, selectedDrawable);
         } else {
-            textView.setBackgroundDrawable(drawable);
+            setTextColor(normalTextColor);
+            fillViewBackgroundDrawable(this, normalDrawable);
+        }
+    }
+
+    /**
+     * 解决enable 和 selected的重叠逻辑
+     * @param enabled 是否可用
+     */
+    public void setEnabledByBadWay(boolean enabled) {
+        setEnabled(enabled);
+        if (enabled) {
+            setTextColor(normalTextColor);
+            fillViewBackgroundDrawable(this, normalDrawable);
+        } else {
+            setTextColor(unableTextColor);
+            fillViewBackgroundDrawable(this, unableDrawable);
+        }
+    }
+
+
+    public static void fillViewBackgroundDrawable(View view, Drawable drawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackground(drawable);
+        } else {
+            view.setBackgroundDrawable(drawable);
         }
     }
 }

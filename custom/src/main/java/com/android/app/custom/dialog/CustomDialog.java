@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CheckedTextView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +26,7 @@ import com.android.app.custom.R;
 import com.android.app.custom.ScreenUtil;
 import com.android.app.custom.view.RoundedRectangleTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,9 +41,9 @@ public class CustomDialog {
 
     private View rootView;
     private TextView titleTV;
-    private RoundedRectangleTextView okTV, cancelTv;
+    private RoundedRectangleTextView okTV, neutralTV, cancelTv;
 
-    private View titleDividerV, confirmDividerV;
+    private View titleDividerV, neutralDividerV, confirmDividerV;
     private LinearLayout containerVG;
 
     public int minHeight;
@@ -51,7 +53,6 @@ public class CustomDialog {
 
     private int bgColor;
     private int radius;
-
 
     public CustomDialog(Context context) {
         this(context, R.style.CustomDialog_Progress);
@@ -78,7 +79,7 @@ public class CustomDialog {
         buttonHeight = titleHeight;
 
         setBackgroundColor(bgColor);
-        updateButton(okTV, cancelTv);
+        updateButton(okTV, null, cancelTv);
 
         dialog.setContentView(rootView, new LinearLayout.LayoutParams(maxWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
@@ -91,6 +92,10 @@ public class CustomDialog {
 
         okTV = (RoundedRectangleTextView) rootView.findViewById(R.id.ok);
         confirmDividerV = rootView.findViewById(R.id.confirm_btn_divider);
+
+        neutralDividerV = rootView.findViewById(R.id.neutral_btn_divider);
+        neutralTV = (RoundedRectangleTextView) rootView.findViewById(R.id.neutral);
+
         cancelTv = (RoundedRectangleTextView) rootView.findViewById(R.id.cancel);
     }
 
@@ -108,7 +113,7 @@ public class CustomDialog {
         rootView.setBackgroundDrawable(drawable);
     }
 
-    private void updateButton(RoundedRectangleTextView okTV, RoundedRectangleTextView cancelTv) {
+    private void updateButton(RoundedRectangleTextView okTV, RoundedRectangleTextView neutralTV, RoundedRectangleTextView cancelTv) {
         Resources resources = context.getResources();
         int whiteColor = Color.WHITE;
         int blueColor = resources.getColor(R.color.blue);
@@ -125,6 +130,13 @@ public class CustomDialog {
                     .textColor(blueColor, bluePressedColor, bluePressedColor)
                     .radii(new float[]{0, 0, 0, 0, radius, radius, 0, 0})
                     .update();
+            if (neutralTV != null) {
+                neutralTV.normalDrawable(whiteColor, whiteColor)
+                        .pressedDrawable(grayColor, grayColor)
+                        .textColor(blueColor, bluePressedColor, bluePressedColor)
+                        .radii(new float[]{0, 0, 0, 0, 0, 0, 0, 0})
+                        .update();
+            }
         } else {
             if (okTV != null) {
                 okTV.normalDrawable(whiteColor, whiteColor)
@@ -198,14 +210,34 @@ public class CustomDialog {
 
     public void setSingleConfirmBtn() {
         confirmDividerV.setVisibility(View.GONE);
+
+        neutralDividerV.setVisibility(View.GONE);
+        neutralTV.setVisibility(View.GONE);
+
         cancelTv.setVisibility(View.GONE);
-        updateButton(okTV, null);
+        updateButton(okTV, null, null);
     }
 
     public void setSingleCancelBtn() {
         okTV.setVisibility(View.GONE);
         confirmDividerV.setVisibility(View.GONE);
-        updateButton(null, cancelTv);
+
+        neutralDividerV.setVisibility(View.GONE);
+        neutralTV.setVisibility(View.GONE);
+
+        updateButton(null, null, cancelTv);
+    }
+
+    private void needThreeBtn() {
+        okTV.setVisibility(View.VISIBLE);
+        confirmDividerV.setVisibility(View.VISIBLE);
+
+        neutralDividerV.setVisibility(View.VISIBLE);
+        neutralTV.setVisibility(View.VISIBLE);
+
+        cancelTv.setVisibility(View.VISIBLE);
+
+        updateButton(okTV, neutralTV, cancelTv);
     }
 
     /**
@@ -217,10 +249,16 @@ public class CustomDialog {
         dialog.setCanceledOnTouchOutside(cancel);
     }
 
-
     public void setConfirmBtn(String text, View.OnClickListener l) {
         okTV.setText(text);
         okTV.setOnClickListener(l);
+    }
+
+    public void setNeutralBtn(String text, View.OnClickListener l) {
+        neutralTV.setText(text);
+        neutralTV.setOnClickListener(l);
+
+        needThreeBtn();
     }
 
     public void setCancelBtn(String text, View.OnClickListener l) {
@@ -251,7 +289,7 @@ public class CustomDialog {
     /**
      * 简单消息类弹窗
      */
-    public static class MessageDialog extends CustomDialog {
+    public static final class MessageDialog extends CustomDialog {
         private TextView msgTV;
 
         public MessageDialog(Context context) {
@@ -263,7 +301,7 @@ public class CustomDialog {
 
             msgTV = new TextView(getContext());
             msgTV.setGravity(Gravity.CENTER_VERTICAL);
-            int padding = (int) getContext().getResources().getDimension(R.dimen.normal_padding_12_length);
+            int padding = (int) getContext().getResources().getDimension(R.dimen.normal_padding_length);
             msgTV.setPadding(padding, 0, padding, 0);
 
             int textSize = (int) getContext().getResources().getDimension(R.dimen.text_small);
@@ -280,7 +318,7 @@ public class CustomDialog {
     /**
      * 简单字符列表类弹窗 (只带有取消按钮)
      */
-    public static class ArrayListViewDialog extends CustomDialog {
+    public static final class ArrayListViewDialog extends CustomDialog {
         private ListView lv;
         private BaseAdapter adapter;
 
@@ -330,7 +368,7 @@ public class CustomDialog {
                     final ViewHolder vh;
                     if (convertView == null) {
                         TextView itemView = new TextView(context);
-                        itemView.setTextColor(Color.BLACK);
+                        itemView.setTextColor(context.getResources().getColor(R.color.general_black));
                         itemView.setGravity(gravity);
                         itemView.setHeight(itemHeight);
                         itemView.setPadding(paddingLR, 0, paddingLR, 0);
@@ -386,9 +424,201 @@ public class CustomDialog {
     }
 
     /**
+     * 带有单选框的列表
+     */
+    public static final class SingleChoiceListViewDialog extends CustomDialog {
+        private ListView listView;
+        private List<Pair<Pair<Integer, String>, Boolean>> pairs;
+        private CheckedListViewAdapter adapter;
+
+        /**
+         * @param context         上下文
+         * @param list            数据列表(包含默认项目，也可以没有，但是不可以多个选择)
+         * @param confirmListener 默认选中项
+         */
+        public SingleChoiceListViewDialog(final Context context, final List<Pair<Pair<Integer, String>, Boolean>> list, final ConfirmListener confirmListener) {
+            super(context);
+            this.pairs = list;
+
+            setCanceledOnTouchOutside(false);
+            int itemHeight = context.getResources().getDimensionPixelSize(R.dimen.item_second_height);
+
+            listView = new ListView(context);
+            listView.setDividerHeight(1);
+            listView.setSelector(R.drawable.selector_listview_item_bg);
+
+            adapter = new CheckedListViewAdapter(context, pairs);
+            listView.setAdapter(adapter);
+            setSingleCancelBtn();
+
+            int totalSize = titleHeight + buttonHeight + itemHeight * list.size();
+            if (totalSize > maxHeight) {
+                measureContainerMaxHeight(maxHeight);
+            }
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    setChooseIndex(position);
+                    confirmListener.onConfirmIndex(position);
+                    dismiss();
+                }
+            });
+
+            setContainerView(listView);
+
+            setCancelBtn("取消", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                }
+            });
+        }
+
+        public void setChooseIndex(int index) {
+            for (Pair<Pair<Integer, String>, Boolean> pair : pairs) {
+                pair.second = pair.first.first == index;
+            }
+        }
+
+        public static List<Pair<Pair<Integer, String>, Boolean>> convertListToPairList(List<String> list, int selection){
+            List<Pair<Pair<Integer, String>, Boolean>> pairList = new ArrayList<>(list.size());
+            for (int i = 0; i < list.size(); i++) {
+                Pair<Integer, String> pairDetail = new Pair<>(i, list.get(i));
+                Pair<Pair<Integer, String>, Boolean> pair = new Pair<>(pairDetail, selection == i);
+                pairList.add(pair);
+            }
+            return  pairList;
+        }
+
+        public interface ConfirmListener {
+            /**
+             * @param position 选择位置
+             */
+            void onConfirmIndex(int position);
+        }
+    }
+
+    /**
+     * 带有多选框的列表
+     */
+    public static final class MultiChoiceListViewDialog extends CustomDialog {
+        private ListView listView;
+        private CheckedListViewAdapter adapter;
+        private ConfirmListener confirmListener;
+
+        /**
+         * @param context 上下文
+         * @param list    数据列表
+         * @param l       确定返回接口
+         */
+        public MultiChoiceListViewDialog(final Context context, final List<Pair<Pair<Integer, String>, Boolean>> list, ConfirmListener l) {
+            super(context);
+            this.confirmListener = l;
+            setCanceledOnTouchOutside(false);
+
+            final int itemHeight = context.getResources().getDimensionPixelSize(R.dimen.item_second_height);
+
+            listView = new ListView(context);
+            listView.setDividerHeight(1);
+            listView.setSelector(R.drawable.selector_listview_item_bg);
+
+            adapter = new CheckedListViewAdapter(context, list);
+            listView.setAdapter(adapter);
+            setContainerView(listView);
+
+            int totalSize = titleHeight + buttonHeight + itemHeight * list.size();
+            if (totalSize > maxHeight) {
+                measureContainerMaxHeight(maxHeight);
+            }
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Pair<Pair<Integer, String>, Boolean> item = adapter.getItem(position);
+                    item.second = !item.second;
+                    updateList();
+                }
+            });
+
+            setConfirmBtn("确定", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    confirmListener.onConfirmIndexes(list);
+                    dismiss();
+                }
+            });
+            setCancelBtn("取消", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                }
+            });
+        }
+
+        public void updateList() {
+            adapter.notifyDataSetChanged();
+        }
+
+        public interface ConfirmListener {
+            /**
+             * @param chooseList 选择后的状态列表
+             */
+            void onConfirmIndexes(List<Pair<Pair<Integer, String>, Boolean>> chooseList);
+        }
+    }
+
+    private static class CheckedListViewAdapter extends BaseListViewAdapter<Pair<Pair<Integer, String>, Boolean>> {
+
+        public CheckedListViewAdapter(Context context, List<Pair<Pair<Integer, String>, Boolean>> list) {
+            super(context, R.layout.listview_item_with_checkable, list);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            final ViewHolder vh;
+            if (convertView == null) {
+                convertView = inflateItemView();
+                vh = new ViewHolder();
+                vh.textView = (TextView) convertView.findViewById(R.id.text_view);
+                vh.checkBox = (CheckedTextView) convertView.findViewById(R.id.checkbox);
+
+                convertView.setTag(vh);
+            } else {
+                vh = (ViewHolder) convertView.getTag();
+            }
+
+            Pair<Pair<Integer, String>, Boolean> item = getItem(position);
+            vh.textView.setText(item.first.second);
+            vh.checkBox.setChecked(item.second);
+            return convertView;
+        }
+
+        class ViewHolder {
+            TextView textView;
+            CheckedTextView checkBox;
+        }
+    }
+
+    public static class Pair<F, S> {
+        public F first;
+        public S second;
+
+        public Pair(F first, S second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("[id:%s, text:%s]", first, second);
+        }
+    }
+
+    /**
      * 带有自动消失功能的弹窗(类似Toast)
      */
-    public static class AutoDismissDialog extends CustomDialog {
+    public static final class AutoDismissDialog extends CustomDialog {
 
         private ImageView closeBtn;
         private TextView msgTV;
@@ -397,7 +627,7 @@ public class CustomDialog {
             super(context);
             onlyKeepContainerView();
             setCanceledOnTouchOutside(true);
-            getRootView().setBackgroundColor(Color.BLACK);
+            getRootView().setBackgroundColor(context.getResources().getColor(R.color.general_black));
             int padding = (int) getContext().getResources().getDimension(R.dimen.normal_padding_length);
 
             FrameLayout frameLayout = new FrameLayout(context);
@@ -414,7 +644,7 @@ public class CustomDialog {
 
             msgTV = new TextView(getContext());
             msgTV.setGravity(Gravity.CENTER);
-            msgTV.setTextColor(Color.WHITE);
+            msgTV.setTextColor(context.getResources().getColor(R.color.general_white));
 
             msgTV.setPadding(padding, padding, padding, padding);
             FrameLayout.LayoutParams params2 = new FrameLayout.LayoutParams(
