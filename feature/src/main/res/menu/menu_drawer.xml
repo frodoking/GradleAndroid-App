@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_recyclerview"
+            android:icon="@drawable/ic_account_balance_wallet_black_36dp"
+            android:checkable="true"
+            android:title="@string/action_recyclerview" />
+        <item
+            android:id="@+id/action_staggered_gridlayout"
+            android:icon="@drawable/ic_assignment_turned_in_black_36dp"
+            android:checkable="true"
+            android:title="@string/action_staggered_gridlayout" />
+        <item
+            android:icon="@drawable/ic_bookmark_black_36dp"
+            android:checkable="true"
+            android:title="书签" />
+        <item
+            android:id="@+id/nav_discussion"
+            android:icon="@drawable/ic_card_giftcard_black_36dp"
+            android:checkable="true"
+            android:title="Discussion" />
+    </group>
+
+    <item android:title="新开页面">
+        <menu>
+            <item
+                android:id="@+id/action_coordinatorlayout"
+                android:icon="@drawable/ic_build_black_36dp"
+                android:checkable="true"
+                android:title="@string/action_coordinatorlayout" />
+            <item
+                android:id="@+id/action_coordinator_behavior"
+                android:icon="@drawable/ic_build_black_36dp"
+                android:checkable="true"
+                android:title="@string/action_coordinator_behavior" />
+        </menu>
+    </item>
+
+</menu>

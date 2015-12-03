@@ -160,7 +160,7 @@ public class UploadActivity extends Activity {
 
         request.addFileToUpload(fileToUploadPath, paramNameString, "test", ContentType.APPLICATION_OCTET_STREAM);
 
-        request.setNotificationConfig(R.drawable.ic_launcher, getString(R.string.app_name),
+        request.setNotificationConfig(R.drawable.cb_checked, getString(R.string.app_name),
                 getString(R.string.uploading), getString(R.string.upload_success),
                 getString(R.string.upload_error), false);
 

@@ -159,7 +159,7 @@ public class DemoPage extends SlidingMenuPage implements
 		Context context = getContext();
 		final OnekeyShare oks = new OnekeyShare();
 
-		oks.setNotification(R.drawable.ic_launcher, context.getString(R.string.share));
+		oks.setNotification(R.drawable.cb_checked, context.getString(R.string.share));
 		//oks.setAddress("12345678901");
 		oks.setTitle(CustomShareFieldsPage.getString("title", context.getString(R.string.evenote_title)));
 		oks.setTitleUrl(CustomShareFieldsPage.getString("titleUrl", "http://mob.com"));
@@ -217,7 +217,7 @@ public class DemoPage extends SlidingMenuPage implements
 		oks.setShareContentCustomizeCallback(new ShareContentCustomizeDemo());
 
 		// 去除注释，演示在九宫格设置自定义的图标
-		Bitmap enableLogo = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+		Bitmap enableLogo = BitmapFactory.decodeResource(getResources(), R.drawable.cb_checked);
 		Bitmap disableLogo = BitmapFactory.decodeResource(getResources(), R.drawable.sharesdk_unchecked);
 		String label = getResources().getString(R.string.share);
 		OnClickListener listener = new OnClickListener() {

@@ -182,7 +182,7 @@ public class WechatPage extends SlidingMenuPage implements
 
         } else if (i == R.id.btnUploadBm) {
             sp.setShareType(Platform.SHARE_IMAGE);
-            Bitmap imageData = BitmapFactory.decodeResource(v.getResources(), R.drawable.ic_launcher);
+            Bitmap imageData = BitmapFactory.decodeResource(v.getResources(), R.drawable.cb_checked);
             sp.setImageData(imageData);
 
         } else if (i == R.id.btnUploadUrl) {
@@ -200,7 +200,7 @@ public class WechatPage extends SlidingMenuPage implements
 
         } else if (i == R.id.btnEmojiBitmap) {
             sp.setShareType(Platform.SHARE_EMOJI);
-            Bitmap imageData = BitmapFactory.decodeResource(v.getResources(), R.drawable.ic_launcher);
+            Bitmap imageData = BitmapFactory.decodeResource(v.getResources(), R.drawable.cb_checked);
             sp.setImageData(imageData);
 
         } else if (i == R.id.btnMusic) {
@@ -223,7 +223,7 @@ public class WechatPage extends SlidingMenuPage implements
         } else if (i == R.id.btnWebpageBm) {
             sp.setShareType(Platform.SHARE_WEBPAGE);
             sp.setUrl("http://t.cn/zT7cZAo");
-            Bitmap imageData = BitmapFactory.decodeResource(v.getResources(), R.drawable.ic_launcher);
+            Bitmap imageData = BitmapFactory.decodeResource(v.getResources(), R.drawable.cb_checked);
             sp.setImageData(imageData);
 
         } else if (i == R.id.btnWebpageUrl) {

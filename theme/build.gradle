@@ -22,6 +22,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
+    compile libraries.support_v4
+    compile libraries.appcompat_v7
+    compile libraries.design
+    compile libraries.recyclerview_v7
 }

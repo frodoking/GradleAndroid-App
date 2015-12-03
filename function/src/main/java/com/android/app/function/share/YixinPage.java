@@ -8,14 +8,6 @@
 
 package com.android.app.function.share;
 
-import java.util.HashMap;
-import m.framework.ui.widget.slidingmenu.SlidingMenu;
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.utils.UIHandler;
-import cn.sharesdk.framework.Platform.ShareParams;
-import cn.sharesdk.framework.PlatformActionListener;
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.framework.TitleLayout;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Message;
@@ -27,6 +19,16 @@ import android.widget.CheckedTextView;
 import android.widget.Toast;
 
 import com.android.app.function.R;
+
+import java.util.HashMap;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.Platform.ShareParams;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.framework.TitleLayout;
+import cn.sharesdk.framework.utils.UIHandler;
+import m.framework.ui.widget.slidingmenu.SlidingMenu;
 
 /** 易信api的演示页面，展示了“易信好友”和“易信朋友圈”的接口 */
 public class YixinPage extends SlidingMenuPage implements
@@ -198,7 +200,7 @@ public class YixinPage extends SlidingMenuPage implements
 
         } else if (i == R.id.btnUploadBm) {
             sp.setShareType(Platform.SHARE_IMAGE);
-            Bitmap imageData = BitmapFactory.decodeResource(v.getResources(), R.drawable.ic_launcher);
+            Bitmap imageData = BitmapFactory.decodeResource(v.getResources(), R.drawable.cb_checked);
             sp.setImageData(imageData);
 
         } else if (i == R.id.btnUploadUrl) {
@@ -225,7 +227,7 @@ public class YixinPage extends SlidingMenuPage implements
         } else if (i == R.id.btnWebpageBm) {
             sp.setShareType(Platform.SHARE_WEBPAGE);
             sp.setUrl("http://t.cn/zT7cZAo");
-            Bitmap imageData = BitmapFactory.decodeResource(v.getResources(), R.drawable.ic_launcher);
+            Bitmap imageData = BitmapFactory.decodeResource(v.getResources(), R.drawable.cb_checked);
             sp.setImageData(imageData);
 
         } else if (i == R.id.btnWebpageUrl) {

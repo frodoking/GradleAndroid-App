@@ -97,9 +97,10 @@ android {
 repositories { flatDir { dirs 'libs' } }
 
 dependencies {
+    compile project(":test")
     compile project(":function")
     compile project(":custom")
-    compile project(":test")
+    compile project(":feature")
     compile project(":theme")
     compile project(":plugin:pluginhost")
 }

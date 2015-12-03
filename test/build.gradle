@@ -22,6 +22,6 @@ android {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.12'
+    testCompile libraries.junit
     compile project(":theme")
 }
