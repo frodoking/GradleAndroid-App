@@ -10,8 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.app.R;
-import com.android.app.function.upload.upload.FileUpload;
-import com.android.app.function.upload.upload.FileUploadCenter;
 
 import java.io.File;
 import java.net.URL;
@@ -212,13 +210,13 @@ public class UploadActivity extends Activity {
     public void uploadFileToServer() {
         LinkedList<String> files = getImagePathFromSD();
 
-        FileUpload fileUpload = new FileUpload();
-        fileUpload.group = "For Test";
-        fileUpload.files = files;
-
-        FileUploadCenter fileUploadCenter = FileUploadCenter.from(this);
-        fileUploadCenter.init(SERVER);
-        fileUploadCenter.addTask(fileUpload);
+//        FileUpload fileUpload = new FileUpload();
+//        fileUpload.group = "For Test";
+//        fileUpload.files = files;
+//
+//        FileUploadCenter fileUploadCenter = FileUploadCenter.from(this);
+//        fileUploadCenter.init(SERVER);
+//        fileUploadCenter.addTask(fileUpload);
     }
 
 

@@ -1,12 +1,5 @@
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppBaseTheme" parent="@android:style/Theme">
-        <item name="android:background">@drawable/main_background</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
-
-    <style name="ThemeProjectTheme" parent="AppBaseTheme">
+    <style name="ThemeProjectTheme" parent="AppTheme">
         <item name="android:dialogTheme">@style/DialogTheme</item>
         <item name="android:textViewStyle">@style/TextViewTheme</item>
         <item name="android:editTextStyle">@style/EditTextTheme</item>

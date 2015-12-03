@@ -99,6 +99,7 @@ repositories { flatDir { dirs 'libs' } }
 dependencies {
     compile project(":function")
     compile project(":custom")
+    compile project(":test")
     compile project(":theme")
     compile project(":plugin:pluginhost")
 }

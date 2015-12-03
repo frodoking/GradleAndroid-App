@@ -1,0 +1,7 @@
+<resources>
+    <string name="test">Test</string>
+    <string name="search_webview">Search For WebView</string>
+    <string name="action_search">Search</string>
+    <string name="search_result">WebView Url</string>
+    <string name="search_hint">Please input Url</string>
+</resources>
