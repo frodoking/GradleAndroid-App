@@ -135,4 +135,6 @@
     <string name="safewebviewbridge">HyBrid解决Java与JavaScript互通方案</string>
     <string name="dialog_title_system_msg">系统消息</string>
 
+    <!-- Glide -->
+    <string name="glide">Glide</string>
 </resources>

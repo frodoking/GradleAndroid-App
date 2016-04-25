@@ -79,8 +79,6 @@ public class SearchViewForWebViewActivity extends AppCompatActivity {
             if (webView.canGoBack()) {
                 webView.goBack();//返回上一页面
                 return true;
-            } else {
-                System.exit(0);//退出程序
             }
         }
         return super.onKeyDown(keyCode, event);

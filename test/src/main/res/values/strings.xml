@@ -4,4 +4,6 @@
     <string name="action_search">Search</string>
     <string name="search_result">WebView Url</string>
     <string name="search_hint">Please input Url</string>
+
+    <string name="test_handler">Test Handler</string>
 </resources>

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.android.app.function.R;
 import com.android.app.function.retrofit.model.JustinTvStreamData;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -56,13 +56,13 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
         holder.lblViewers.setText(getContext().getResources().getQuantityString(R.plurals.viewers, totalViewers, totalViewers));
 
         // Load the screen cap image on a background thread
-        Picasso.with(getContext())
+        Glide.with(getContext())
                 .load(stream.getChannel().getScreen_cap_url_medium())
                 .placeholder(android.R.color.white)
                 .into(holder.screenCapThumbnailImage);
 
         // Load the channel thumbnail image on a background thread
-        Picasso.with(getContext())
+        Glide.with(getContext())
                 .load(stream.getChannel().getImage_url_medium())
                 .placeholder(android.R.color.transparent)
                 .into(holder.channelThumbnailImage);

@@ -279,6 +279,15 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".function.glide.GlideActivity"
+            android:label="@string/glide">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.app.main.function.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
         <!--custom-->
         <activity
             android:name=".custom.CustomActivity"
@@ -378,5 +387,17 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+
+        <activity
+            android:name=".test.handler.HandlerActivity"
+            android:label="@string/test_handler"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.app.main.test.SAMPLE_CODE" />
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+
     </application>
 </manifest>
