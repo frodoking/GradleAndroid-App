@@ -334,6 +334,15 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".custom.view.flowlayout.FlowLayoutActivity"
+            android:label="flowlayout">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.app.main.custom.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
         <!--feature-->
         <activity
             android:name=".feature.MaterialDesignActivity"

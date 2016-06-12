@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:${ANDROID_GRADLE_VERSION}"
+        classpath 'com.android.tools.build:gradle:2.2.0-alpha3'
     }
 }
 
@@ -14,13 +14,11 @@ subprojects {
     repositories {
         jcenter()
     }
-
-    tasks.withType(JavaCompile) {
-        sourceCompatibility = JavaVersion.VERSION_1_7
-        targetCompatibility = JavaVersion.VERSION_1_7
+    configurations {
+        compile.exclude group: "org.apache.httpcomponents", module: "httpclient"
     }
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.9'
+    gradleVersion = '2.10'
 }
