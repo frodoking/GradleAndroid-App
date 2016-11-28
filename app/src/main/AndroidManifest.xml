@@ -404,7 +404,16 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.app.main.test.SAMPLE_CODE" />
-                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".test.rebuild.RebuildActivity"
+            android:label="@string/test_rebuild"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.app.main.test.SAMPLE_CODE" />
             </intent-filter>
         </activity>
 

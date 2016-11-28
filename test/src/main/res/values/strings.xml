@@ -6,4 +6,5 @@
     <string name="search_hint">Please input Url</string>
 
     <string name="test_handler">Test Handler</string>
+    <string name="test_rebuild">Test Rebuild Activity and Fragment</string>
 </resources>

@@ -20,6 +20,7 @@ import android.view.View;
 
 import com.android.app.feature.coordinatorlayout.CoordinatorLayoutActivity;
 import com.android.app.feature.coordinatorlayout.CoordinatorLayoutBehaviorActivity;
+import com.android.app.feature.drawable.DrawableFragment;
 import com.android.app.feature.recyclerview.RecycleViewFragment;
 import com.android.app.feature.recyclerview.StaggeredGridLayoutFragment;
 
@@ -97,6 +98,8 @@ public class MaterialDesignActivity extends AppCompatActivity {
                             Intent intent = new Intent();
                             intent.setClass(MaterialDesignActivity.this, CoordinatorLayoutBehaviorActivity.class);
                             startActivity(intent);
+                        }else if(id == R.id.action_svg){
+                            newFragment = new DrawableFragment();
                         } else {
                             mToolbar.setTitle(R.string.feature2);
                         }

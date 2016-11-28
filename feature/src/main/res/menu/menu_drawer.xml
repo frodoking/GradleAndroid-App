@@ -13,14 +13,15 @@
             android:checkable="true"
             android:title="@string/action_staggered_gridlayout" />
         <item
-            android:icon="@drawable/ic_bookmark_black_36dp"
-            android:checkable="true"
-            android:title="书签" />
-        <item
             android:id="@+id/nav_discussion"
             android:icon="@drawable/ic_card_giftcard_black_36dp"
             android:checkable="true"
             android:title="Discussion" />
+        <item
+            android:id="@+id/action_svg"
+            android:icon="@drawable/ic_bookmark_black_36dp"
+            android:checkable="true"
+            android:title="@string/action_svg" />
     </group>
 
     <item android:title="新开页面">
