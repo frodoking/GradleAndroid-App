@@ -1,4 +1,4 @@
-apply from: 'dependencyDefinitions.gradle'
+apply from: 'https://raw.githubusercontent.com/frodoking/gradle-dependency-definitions/master/AndroidDependencyDefinitions.gradle'
 
 buildscript {
     repositories {
